@@ -14,9 +14,9 @@ class UserController
      */
     public function create(Request $request, DataService $dataService): Response
     {
-        $httpSResponseStatus = $dataService->createUser($request->getContent());
+        $dataService->createUser($request->getContent());
 
-        return new Response('', $httpSResponseStatus);
+        return new Response();
     }
 
     /**

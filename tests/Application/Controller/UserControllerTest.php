@@ -12,7 +12,7 @@ class UserControllerTest extends WebTestCase
         $client->jsonRequest('POST', '/user', array('firstName' => 'Jane', 'lastName' => 'Doe'));
         $response = $client->getResponse();
 
-        $this->assertSame(Response::HTTP_CREATED, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
     }
 
     public function testReadOk(): void
