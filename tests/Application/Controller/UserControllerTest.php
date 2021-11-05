@@ -15,6 +15,15 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
     }
 
+    public function testCreateFailsNoBody(): void
+    {
+        $client = static::createClient();
+        $client->request('POST', '/user');
+        $response = $client->getResponse();
+
+        $this->assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
+
     public function testReadOk(): void
     {
         $client = static::createClient();
