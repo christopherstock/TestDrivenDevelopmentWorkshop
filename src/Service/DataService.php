@@ -21,8 +21,10 @@ class DataService
             return Response::HTTP_BAD_REQUEST;
         }
 
-        $userDataFromRequest = User::createFromRequestBody($requestBody);
         $success = $this->db->createUser($userDataFromRequest->firstName, $userDataFromRequest->lastName);
+        if (!$success) {
+            return Response::HTTP_INTERNAL_SERVER_ERROR;
+        }
 
         return Response::HTTP_OK;
     }
