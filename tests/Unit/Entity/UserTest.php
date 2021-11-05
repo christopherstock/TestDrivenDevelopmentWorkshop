@@ -31,4 +31,19 @@ class UserTest extends KernelTestCase
         $this->assertEquals('John', $user->firstName);
         $this->assertEquals('Doe',  $user->lastName);
     }
+
+    /**
+     * @dataProvider provideBadRequestBodies
+     */
+    public function testCreateFromRequestFailsBodyEmpty($requestBody): void
+    {
+        $user = User::createFromRequestBody($requestBody);
+
+        $this->assertNull($user);
+    }
+
+    public function provideBadRequestBodies(): array
+    {
+        return [ [ '' ], [ '{id' ], [ '[]' ]];
+    }
 }
