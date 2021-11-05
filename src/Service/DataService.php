@@ -14,10 +14,17 @@ class DataService
         $this->db = $db;
     }
 
-    public function createUser(string $requestBody): void
+    public function createUser(string $requestBody): int
     {
         $userDataFromRequest = User::createFromRequestBody($requestBody);
+        if ($userDataFromRequest === null) {
+            return Response::HTTP_BAD_REQUEST;
+        }
+
+        $userDataFromRequest = User::createFromRequestBody($requestBody);
         $success = $this->db->createUser($userDataFromRequest->firstName, $userDataFromRequest->lastName);
+
+        return Response::HTTP_OK;
     }
 
     public function readUser(int $id): User
