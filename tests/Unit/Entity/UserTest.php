@@ -44,6 +44,6 @@ class UserTest extends KernelTestCase
 
     public function provideBadRequestBodies(): array
     {
-        return [ [ '' ], [ '{id' ], [ '[]' ]];
+        return [[''], ['{id'], ['[]']];
     }
 }
