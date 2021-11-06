@@ -16,13 +16,11 @@ class DataService
 
     public function createUser(string $requestBody): int
     {
-        $userDataFromRequest = User::createFromRequestBody($requestBody);
-        if ($userDataFromRequest === null) {
+        if (($userDataFromRequest = User::createFromRequestBody($requestBody)) === null) {
             return Response::HTTP_BAD_REQUEST;
         }
 
-        $success = $this->db->createUser($userDataFromRequest->firstName, $userDataFromRequest->lastName);
-        if (!$success) {
+        if (!$this->db->createUser($userDataFromRequest->firstName, $userDataFromRequest->lastName)) {
             return Response::HTTP_INTERNAL_SERVER_ERROR;
         }
 
