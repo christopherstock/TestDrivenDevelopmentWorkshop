@@ -13,7 +13,7 @@ class User
         $this->lastName  = $lastName;
     }
 
-    public static function createFromRequestBody(string $requestBody) :?User
+    public static function createFromRequestBody(?string $requestBody) :?User
     {
         $json = json_decode($requestBody);
         if (!is_object($json)) return null;
