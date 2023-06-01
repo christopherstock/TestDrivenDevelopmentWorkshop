@@ -1,10 +1,10 @@
 <?php
 namespace App\Tests\Integration\Service;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\DataService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 class DataServiceTest extends KernelTestCase
 {
@@ -16,7 +16,8 @@ class DataServiceTest extends KernelTestCase
         $userRepositoryMock
             ->expects($this->once())
             ->method('readUser')
-            ->with(42);
+            ->with(42)
+            ->willReturn(new User(42, 'John', 'Doe'));
 
         $container = static::getContainer();
         $container->set('App\Repository\UserRepository', $userRepositoryMock);
@@ -24,6 +25,10 @@ class DataServiceTest extends KernelTestCase
         /* @var DataService $dataService */
         $dataService = $container->get(DataService::class);
 
-        $dataService->readUser(42);
+        $user = $dataService->readUser(42);
+
+        $this->assertEquals(42, $user->id);
+        $this->assertEquals('John', $user->firstName);
+        $this->assertEquals('Doe', $user->lastName);
     }
 }
