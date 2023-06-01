@@ -15,6 +15,7 @@ class User
 
     public static function createFromRequestBody(?string $requestBody) :?User
     {
+        if (!$requestBody) return null;
         $json = json_decode($requestBody);
         if (!is_object($json)) return null;
 
