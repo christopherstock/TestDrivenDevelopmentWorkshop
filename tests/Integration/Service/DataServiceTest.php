@@ -5,6 +5,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\DataService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class DataServiceTest extends KernelTestCase
 {
